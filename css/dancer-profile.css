@@ -1,0 +1,282 @@
+/* --- ЗАГАЛЬНІ ВІДСТУПИ ПРОФІЛЮ --- */
+.profile-main {
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+/* --- ВЕРХНЯ ЧАСТИНА (Сайдбар + Інфо) --- */
+.profile-top-section {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 60px;
+    align-items: flex-start;
+}
+
+/* Сайдбар */
+.profile-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+.profile-main-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+/* Картка з балами */
+.profile-points-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #f8fafc;
+}
+
+.points-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.points-header span:first-child {
+    grid-column: 2;
+}
+
+.points-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.points-row:last-child {
+    margin-bottom: 0;
+}
+
+.program-badge {
+    background: #4db2e6;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 0;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.class-val {
+    font-weight: 700;
+    color: #334155;
+    font-size: 15px;
+}
+
+.points-val {
+    font-weight: 700;
+    color: #4db2e6;
+    font-size: 15px;
+}
+
+/* Інфо профілю (Права частина) */
+.profile-info {
+    flex-grow: 1;
+}
+
+.profile-name {
+    font-size: 24px;
+    color: #4db2e6;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.profile-details {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px;
+    color: #475569;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.detail-label {
+    color: #94a3b8;
+    margin-right: 5px;
+}
+
+/* Блок Discover More */
+.discover-more {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.discover-more h3 {
+    font-size: 16px;
+    color: #334155;
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-weight: 700;
+}
+
+.discover-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    color: #475569;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background 0.2s;
+}
+
+.discover-link:last-child {
+    border-bottom: none;
+}
+
+.discover-link:hover {
+    background: #f8fafc;
+}
+
+.discover-link i {
+    color: #cbd5e1;
+}
+
+/* --- НИЖНЯ ЧАСТИНА (Історія) --- */
+.profile-history-section {
+    width: 100%;
+}
+
+.history-title {
+    font-size: 22px;
+    color: #4db2e6;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.history-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 25px;
+}
+
+.h-tab {
+    background: none;
+    border: none;
+    font-size: 15px;
+    color: #64748b;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+    font-family: inherit;
+}
+
+.h-tab.active {
+    color: #4db2e6;
+    font-weight: 600;
+}
+
+.h-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #4db2e6;
+}
+
+/* Таблиця */
+.history-table-container {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 800px;
+}
+
+.history-table th {
+    color: #64748b;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.history-table td {
+    padding: 18px 20px;
+    color: #334155;
+    font-size: 15px;
+    vertical-align: top;
+    border-bottom: 1px solid #f1f5f9;
+    line-height: 1.5;
+}
+
+.history-table tr:last-child td {
+    border-bottom: none;
+}
+
+.h-name a {
+    color: #4db2e6;
+    text-decoration: none;
+}
+
+.h-name a:hover {
+    text-decoration: underline;
+}
+
+/* Коментарі */
+.login-to-comment {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.login-to-comment a {
+    color: #334155;
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+.login-to-comment a:hover {
+    color: #4db2e6;
+}
+
+/* --- АДАПТИВНІСТЬ --- */
+@media (max-width: 768px) {
+    .profile-top-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile-sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
+    .profile-info {
+        width: 100%;
+    }
+    .history-tabs {
+        gap: 15px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 5px;
+    }
+}

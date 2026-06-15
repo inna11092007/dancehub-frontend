@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanceHub - Люди</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/people.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo">DanceHub</div>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="index.html" data-lang-key="nav_comp">Змагання</a></li>
+                <li><a href="results.html" data-lang-key="nav_results">Результати</a></li>
+                <li><a href="clubs.html" data-lang-key="nav_clubs">Клуби</a></li>
+                <li><a href="people.html" class="active" data-lang-key="nav_people">Люди</a></li>
+                <li><a href="ads.html" data-lang-key="nav_ads">Оголошення</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span class="lang active">Укр</span><span class="separator">|</span><span class="lang">Eng</span>
+            </div>
+            <a href="login.html" class="login-btn"><i class="fa-solid fa-right-to-bracket"></i> <span data-lang-key="login">Вхід</span></a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    
+    <div class="people-filter-panel">
+        <div class="p-filter-item">
+            <select class="p-select" id="people-role-filter">
+                <option value="all" data-lang-key="filter_all_roles">Всі ролі</option>
+                <option value="dancer" data-lang-key="filter_dancer">Танцюрист</option>
+                <option value="trainer" data-lang-key="filter_trainer">Тренер</option>
+            </select>
+            <span class="p-arrow">▼</span>
+        </div>
+        
+        <div class="p-filter-item">
+            <select class="p-select" id="people-country-filter">
+                <option value="all" data-lang-key="filter_all_countries">Всі країни</option>
+                <option value="ua">Ukraine (Україна)</option>
+                <option value="pl">Poland (Польща)</option>
+                <option value="de">Germany (Німеччина)</option>
+                <option value="us">USA (США)</option>
+                <option value="gb">United Kingdom (Велика Британія)</option>
+                <option value="fr">France (Франція)</option>
+                <option value="it">Italy (Італія)</option>
+                <option value="es">Spain (Іспанія)</option>
+            </select>
+            <span class="p-arrow">▼</span>
+        </div>
+        
+        <div class="p-filter-item search-input-box">
+            <input type="text" class="p-input" id="people-city-filter" data-lang-placeholder="filter_enter_city" placeholder="Введіть місто...">
+        </div>
+        
+        <div class="p-filter-item search-input-box">
+            <input type="text" class="p-input" id="people-search" data-lang-placeholder="search_surname" placeholder="Прізвище або Ім'я">
+        </div>
+    </div>
+
+    <div class="people-grid" id="people-container">
+        <p style="text-align:center; grid-column: 1/-1; padding: 40px; color: #888; font-size: 16px;">Завантаження...</p>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="logo">DanceHub</h2>
+            <p data-lang-key="footer_desc">Dance Competition Management Platform</p>
+            <div class="socials">
+                <a href="#" target="_blank" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="social"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_links_title">ШВИДКІ ПОСИЛАННЯ</h3>
+            <ul>
+                <li data-lang-key="footer_news">Новини</li>
+                <li>Artistic & Modern dances</li>
+                <li data-lang-key="footer_privacy">Приватність</li>
+                <li data-lang-key="footer_offer">Публічна оферта</li>
+                <li data-lang-key="footer_contact">Зворотній зв'язок</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_sub_title">ПІДПИСАТИСЬ НА РОЗСИЛКУ</h3>
+            <div class="subscribe">
+                <input type="email" data-lang-placeholder="footer_email_placeholder" placeholder="Введіть Ваш e-mail">
+                <button data-lang-key="footer_sub_btn">Підписатись</button>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_stats_title">ЗАРЕЄСТРОВАНІ ТАНЦЮРИСТИ</h3>
+            <p class="big-number" id="dancers-count">0</p>
+            <h4 data-lang-key="footer_payment_title">МИ ПРИЙМАЄМО</h4>
+            <p class="payment-icons">
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-visa"></i>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        DanceHub 2026. <span data-lang-key="footer_rights">All Rights Reserved</span>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

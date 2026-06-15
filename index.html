@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanceHub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+
+        <div class="logo">DanceHub</div>
+
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="#" data-lang-key="nav_comp">Змагання</a></li>
+                <li><a href="#" data-lang-key="nav_results">Результати</a></li>
+                <li><a href="#" data-lang-key="nav_clubs">Клуби</a></li>
+                <li><a href="#" data-lang-key="nav_people">Люди</a></li>
+                <li><a href="#" data-lang-key="nav_ads">Оголошення</a></li>
+            </ul>
+        </nav>
+
+       <div class="header-right">
+    <div class="lang-switcher">
+        <span class="lang active">Укр</span>
+        <span class="separator">|</span>
+        <span class="lang">Eng</span>
+    </div>
+    
+    <a href="login.html" class="login-btn">
+        <i class="fa-solid fa-right-to-bracket"></i> <span data-lang-key="login">Вхід</span>
+    </a>
+</div>
+
+    </div>
+</header>
+
+<section class="hero">
+
+    <div class="hero-slide active">
+        <img src="assets/images/dance1.jpg" alt="Dance Event">
+        <div class="hero-content">...</div>
+    </div>
+
+    <div class="hero-slide">
+        <img src="assets/images/dance2.png" alt="Dance Event">
+        <div class="hero-content">...</div>
+    </div>
+
+    <div class="hero-slide">
+        <img src="assets/images/dance3.jpg" alt="Dance Event">
+        <div class="hero-content">...</div>
+    </div>
+
+    <div class="slider-controls">
+        <span class="prev">&#10094;</span>
+        <span class="next">&#10095;</span>
+    </div>
+
+    <div class="dots"></div>
+
+</section>
+
+<section class="events-search">
+    <h2 class="events-title" data-lang-key="search_title">Знайдіть змагання та події по всьому світу</h2>
+
+    <div class="events-tabs">
+        <button class="tab active" data-type="all" data-lang-key="tab_all">Всі події</button>
+        <button class="tab" data-type="sport" data-lang-key="tab_sport">Спортивні танці</button>
+        <button class="tab" data-type="pro-am" data-lang-key="tab_pro_am">World Pro-Am</button>
+        <button class="tab" data-type="lessons" data-lang-key="tab_lessons">Збори, Лекції</button>
+    </div>
+
+    <div class="events-filters">
+        <div class="filter-box">
+            <span class="icon">🏳</span>
+            <select id="country-filter" class="custom-select">
+                <option value="all" data-lang-key="filter_all_countries">Всі країни</option>
+                <option value="ua">Ukraine (Україна)</option>
+                <option value="pl">Poland (Польща)</option>
+                <option value="ee">Estonia (Естонія)</option>
+                <option value="fi">Finland (Фінляндія)</option>
+                <option value="fr">France (Франція)</option>
+                <option value="ge">Georgia (Грузія)</option>
+                <option value="de">Germany (Німеччина)</option>
+                <option value="gr">Greece (Греція)</option>
+                <option value="md">Moldova (Молдова)</option>
+                <option value="pt">Portugal (Португалія)</option>
+                <option value="ro">Romania (Румунія)</option>
+                <option value="rs">Serbia (Сербія)</option>
+                <option value="ae">United Arab Emirates (ОАЕ)</option>
+                <option value="uk">United Kingdom (Велика Британія)</option>
+                <option value="us">USA (США)</option>
+            </select>
+            <span class="arrow">▼</span>
+        </div>
+
+        <div class="filter-box">
+            <span class="icon">📍</span>
+            <input type="text" id="city-filter" class="custom-select" data-lang-placeholder="filter_enter_city" placeholder="Введіть місто..." style="background: transparent; border: none; outline: none; width: 100%; color: inherit; font-size: 14px; font-family: inherit; padding: 0;">
+        </div>
+
+        <div class="filter-box">
+            <span class="icon">📅</span>
+            <input type="text" data-lang-placeholder="date_from" placeholder="Дата з" class="custom-date" onfocus="(this.type='date')" onblur="(this.value==''?this.type='text':this.type='date')">
+        </div>
+
+        <div class="filter-box">
+            <span class="icon">📅</span>
+            <input type="text" data-lang-placeholder="date_to" placeholder="Дата до" class="custom-date" onfocus="(this.type='date')" onblur="(this.value==''?this.type='text':this.type='date')">
+        </div>
+    </div>
+</section>
+
+<div class="events" id="dynamic-events-container">
+    <p style="text-align: center; width: 100%; color: #888;">Завантаження змагань...</p>
+</div>
+
+
+<div class="load-more">
+    <button data-lang-key="btn_load_more">Завантажити більше змагань</button>
+</div>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="logo">DanceHub</h2>
+            <p data-lang-key="footer_desc">Dance Competition Management Platform</p>
+            <div class="socials">
+                <a href="https://facebook.com" target="_blank" class="social">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://t.me" target="_blank" class="social">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_links_title">ШВИДКІ ПОСИЛАННЯ</h3>
+            <ul>
+                <li data-lang-key="footer_news">Новини</li>
+                <li>Artistic & Modern dances</li>
+                <li data-lang-key="footer_privacy">Приватність</li>
+                <li data-lang-key="footer_offer">Публічна оферта</li>
+                <li data-lang-key="footer_contact">Зворотній зв'язок</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_sub_title">ПІДПИСАТИСЬ НА РОЗСИЛКУ</h3>
+            <div class="subscribe">
+                <input type="email" data-lang-placeholder="footer_email_placeholder" placeholder="Введіть Ваш e-mail">
+                <button data-lang-key="footer_sub_btn">Підписатись</button>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_stats_title">ЗАРЕЄСТРОВАНІ ТАНЦЮРИСТИ</h3>
+            <p class="big-number" id="dancers-count">0</p>
+            <h4 data-lang-key="footer_payment_title">МИ ПРИЙМАЄМО</h4>
+            <p class="payment-icons">
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-visa"></i>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        DanceHub 2026. <span data-lang-key="footer_rights">All Rights Reserved</span>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+
+
+</body>
+</html>

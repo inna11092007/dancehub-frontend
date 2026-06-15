@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanceHub - Панель Адміністратора</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Основні налаштування */
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; background: #f4f7f6; }
+        
+        /* Бокове меню */
+        .sidebar { width: 250px; background: #2c3e50; color: white; height: 100vh; position: fixed; display: flex; flex-direction: column; }
+        .sidebar .logo { font-size: 24px; font-weight: bold; text-align: center; padding: 20px 0; color: #e91e63; border-bottom: 1px solid #34495e; margin-bottom: 20px; }
+        .sidebar ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .sidebar ul li a { display: block; padding: 15px 25px; color: #b0c4de; text-decoration: none; transition: 0.3s; font-size: 16px; cursor: pointer; }
+        .sidebar ul li a:hover, .sidebar ul li a.active { background: #34495e; color: white; border-left: 4px solid #63b3ed; }
+        .sidebar ul li a i { margin-right: 15px; width: 20px; text-align: center; }
+        .logout-btn { padding: 15px 25px; background: #c0392b; color: white; text-decoration: none; text-align: center; cursor: pointer; border: none; font-size: 16px; font-weight: bold; }
+        .logout-btn:hover { background: #e74c3c; }
+
+        /* Основний контент */
+        .main-content { margin-left: 250px; padding: 30px 40px; width: 100%; box-sizing: border-box; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 15px; }
+        .header h1 { margin: 0; color: #2c3e50; font-size: 24px; }
+        
+        /* Секції (вкладки) */
+        .admin-section { display: none; } 
+        .admin-section.active { display: block; } 
+
+        /* Таблиця */
+        .table-container { background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); overflow: hidden; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; color: #333; font-weight: 600; font-size: 14px; text-transform: uppercase; }
+        
+        /* Форма додавання змагання */
+        .admin-form { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); max-width: 600px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #2c3e50; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 15px; }
+        .save-btn { background: #2ecc71; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
+        .save-btn:hover { background: #27ae60; }
+        .save-btn:disabled { background: #95a5a6; cursor: not-allowed; }
+
+        /* Стилі для списку змагань */
+        .events-list-container { background: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); max-width: 600px; margin-top: 20px; }
+        .event-item { padding: 15px 0; border-bottom: 1px solid #eee; }
+        .event-item:last-child { border-bottom: none; }
+        .event-item h4 { margin: 0 0 5px 0; color: #2c3e50; font-size: 18px; }
+        .event-item p { margin: 0; color: #7f8c8d; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo">DanceHub Admin</div>
+        <ul>
+            <li><a id="nav-users" class="active" onclick="switchTab('users')"><i class="fa-solid fa-users"></i> Користувачі</a></li>
+            <li><a id="nav-events" onclick="switchTab('events')"><i class="fa-solid fa-trophy"></i> Змагання</a></li>
+        </ul>
+        <button class="logout-btn" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Вийти на сайт</button>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1 id="page-title">Управління користувачами</h1>
+        </div>
+
+        <div id="sec-users" class="admin-section active">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ім'я / Прізвище</th>
+                            <th>Email</th>
+                            <th>Роль</th>
+                            <th>Дії</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: #888;">Завантаження користувачів...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="sec-events" class="admin-section">
+            <div class="admin-form">
+                <div class="form-group">
+                    <label>Тип події (Вкладка на головній)</label>
+                    <select id="event-type">
+                        <option value="Спортивні танці">Спортивні танці</option>
+                        <option value="World Pro-Am">World Pro-Am</option>
+                        <option value="Збори лекції">Збори / Лекції</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Назва змагання</label>
+                    <input type="text" id="event-name">
+                </div>
+                <div class="form-group">
+                    <label>Дата проведення</label>
+                    <input type="date" id="event-date">
+                </div>
+                <div class="form-group">
+                    <label>Місто та Країна</label>
+                    <input type="text" id="event-city" placeholder="Наприклад: Київ (Україна)">
+                </div>
+                <div class="form-group">
+                    <label>Організатори</label>
+                    <input type="text" id="event-organizers" placeholder="Наприклад: Цимбаліста Інна">
+                </div>
+                <div class="form-group">
+                    <label>Організація</label>
+                    <input type="text" id="event-organization" placeholder="Наприклад: ФТСУ">
+                </div>
+                <div class="form-group">
+                    <label>Назва файлу картинки</label>
+                    <input type="text" id="event-image" placeholder="Наприклад: cup1.png">
+                    <small style="color: #888;">(Файл має вже лежати в папці assets/images/)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Інформація (Оберіть файл АБО введіть текст/посилання)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="file" id="event-info-upload" accept=".pdf,.doc,.docx" style="flex: 1; padding: 8px;">
+                        <span style="align-self: center; font-weight: bold; color: #888;">АБО</span>
+                        <input type="text" id="event-info-link" placeholder="Введіть текст або посилання" style="flex: 2;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Стилісти (Оберіть файл АБО введіть текст/посилання)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="file" id="event-stylists-upload" accept=".pdf,.doc,.docx,.jpg,.png" style="flex: 1; padding: 8px;">
+                        <span style="align-self: center; font-weight: bold; color: #888;">АБО</span>
+                        <input type="text" id="event-stylists-link" placeholder="Введіть текст або посилання" style="flex: 2;">
+                    </div>
+                </div>
+<div class="form-group">
+    <label>Результати змагань (Оберіть файл АБО введіть посилання)</label>
+    <div style="display: flex; gap: 10px;">
+        <input type="file" id="event-results-upload" accept=".pdf,.xls,.xlsx,.doc,.docx" style="flex: 1; padding: 8px;">
+        <span style="align-self: center; font-weight: bold; color: #888;">АБО</span>
+        <input type="text" id="event-results-link" placeholder="Введіть посилання на результати" style="flex: 2;">
+    </div>
+</div>
+                <div class="form-group">
+                    <label>Розклад і категорії</label>
+                    <textarea id="event-categories" rows="5" placeholder="09:00 - Діти 1 Соло | Ювенали 2 Пара&#10;10:30 - Юніори 1 Латина" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 15px; font-family: inherit; resize: vertical;"></textarea>
+                    <small style="color: #888;">(Кожен новий рядок - новий час. Формат: Час - Категорії)</small>
+                </div>
+
+                <button class="save-btn" onclick="saveNewEvent()">Створити змагання</button>
+                <p id="event-message" style="text-align: center; margin-top: 15px; font-weight: bold;"></p>
+            </div>
+
+            <div class="events-list-container">
+                <h3 style="margin-top: 0; color: #2c3e50;">🏆 Створені змагання:</h3>
+                <div id="events-list">
+                    <p style="text-align: center; color: #888;">Завантаження...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const API_URL = "http://127.0.0.1:8000";
+        let allEvents = []; 
+        let editingEventId = null; 
+
+        // --- 1. ПЕРЕМИКАННЯ ВКЛАДОК ---
+        function switchTab(tabName) {
+            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.sidebar ul li a').forEach(link => link.classList.remove('active'));
+
+            document.getElementById('sec-' + tabName).classList.add('active');
+            document.getElementById('nav-' + tabName).classList.add('active');
+
+            if(tabName === 'users') {
+                document.getElementById('page-title').innerText = "Управління користувачами";
+                fetchUsers();
+            }
+            if(tabName === 'events') {
+                document.getElementById('page-title').innerText = "Управління змаганнями";
+                loadEvents(); 
+            }
+        }
+
+        // --- 2. ОТРИМАННЯ СПИСКУ КОРИСТУВАЧІВ ---
+        async function fetchUsers() {
+            const tableBody = document.getElementById('users-table-body');
+            try {
+                const response = await fetch(`${API_URL}/users`);
+                if (!response.ok) throw new Error("Помилка завантаження");
+                
+                const users = await response.json();
+                tableBody.innerHTML = ''; 
+
+                if (users.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">Користувачів поки немає</td></tr>';
+                    return;
+                }
+
+                users.forEach((user, index) => {
+                    const row = document.createElement('tr');
+                    const name = user.name || user.email.split('@')[0]; 
+                    
+                    let roleCell = "";
+                    if (user.role === 'admin') {
+                        roleCell = `<span style="color: #e91e63; font-weight: bold;">Адміністратор</span>`;
+                    } else {
+                        roleCell = `
+                            <select onchange="changeUserRole(${user.id}, this.value)" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; font-weight: bold; color: #2c3e50; cursor: pointer;">
+                                <option value="dancer" ${user.role === 'dancer' ? 'selected' : ''}>Танцюрист</option>
+                                <option value="trainer" ${user.role === 'trainer' ? 'selected' : ''}>Тренер / Суддя</option>
+                            </select>
+                        `;
+                    }
+
+                    row.innerHTML = `
+                        <td>#${user.id}</td>
+                        <td>${name}</td>
+                        <td>${user.email}</td>
+                        <td>${roleCell}</td>
+                        <td>
+                            <button onclick="deleteUser(${user.id})" style="background: #e74c3c; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 14px;" title="Видалити">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Fetch error:", error);
+                tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: red;">Не вдалося з\'єднатися з бекендом.</td></tr>';
+            }
+        }
+
+        // --- 2.1 ЗМІНА РОЛІ КОРИСТУВАЧА ---
+        async function changeUserRole(userId, newRole) {
+            if (!confirm(`Точно змінити роль користувача #${userId} на "${newRole}"?`)) {
+                fetchUsers(); 
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/users/${userId}/role`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ role: newRole })
+                });
+
+                if (response.ok) {
+                    alert("✅ Роль успішно оновлено!");
+                } else {
+                    const err = await response.json();
+                    alert("❌ Помилка: " + (err.detail || "Не вдалося оновити"));
+                    fetchUsers(); 
+                }
+            } catch (error) {
+                console.error("Error updating role:", error);
+                alert("❌ Сервер не відповідає!");
+                fetchUsers();
+            }
+        }
+
+        // --- 2.2 ВИДАЛЕННЯ КОРИСТУВАЧА ---
+        async function deleteUser(userId) {
+            if (!confirm(`Ти впевнений, що хочеш назавжди видалити користувача #${userId}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/users/${userId}`, {
+                    method: "DELETE"
+                });
+
+                if (response.ok) {
+                    alert("✅ Користувача успішно видалено!");
+                    fetchUsers(); 
+                } else {
+                    const err = await response.json();
+                    alert("❌ Помилка: " + (err.detail || "Не вдалося видалити"));
+                }
+            } catch (error) {
+                console.error("Error deleting user:", error);
+                alert("❌ Сервер не відповідає!");
+            }
+        }
+
+        // --- 3. ЗАВАНТАЖЕННЯ СПИСКУ ЗМАГАНЬ ---
+        async function loadEvents() {
+            const list = document.getElementById('events-list');
+            try {
+                const response = await fetch(`${API_URL}/events`);
+                if (!response.ok) throw new Error("Помилка завантаження");
+                
+                allEvents = await response.json(); 
+                list.innerHTML = ''; 
+
+                if (allEvents.length === 0) {
+                    list.innerHTML = '<p style="text-align: center; color: #888;">Змагань ще немає.</p>';
+                    return;
+                }
+
+                allEvents.forEach(event => {
+                    const item = document.createElement('div');
+                    item.className = 'event-item';
+                    item.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4>${event.name} <span style="font-size: 11px; background: #eef7ff; color: #4db2e6; padding: 2px 6px; border-radius: 6px; margin-left: 8px;">${event.event_type || 'Спортивні танці'}</span></h4>
+                                <p><i class="fa-regular fa-calendar"></i> ${event.date} | м. ${event.city}</p>
+                            </div>
+                            <div>
+                                <button onclick="editEvent(${event.id})" style="background: #f39c12; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px;"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="deleteEvent(${event.id})" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+            } catch (error) {
+                list.innerHTML = '<p style="color: red; text-align: center;">Помилка завантаження.</p>';
+            }
+        }
+
+// --- 4. ЗБЕРЕЖЕННЯ ЗМАГАННЯ (З ФАЙЛАМИ) ---
+async function saveNewEvent() {
+    const eventType = document.getElementById('event-type').value;
+    const name = document.getElementById('event-name').value;
+    const date = document.getElementById('event-date').value;
+    const city = document.getElementById('event-city').value;
+    const image = document.getElementById('event-image').value; 
+    const organizers = document.getElementById('event-organizers').value;
+    const organization = document.getElementById('event-organization').value;
+    const categories = document.getElementById('event-categories').value;
+    
+    const msg = document.getElementById('event-message');
+
+    if (!name || !date) {
+        msg.style.color = "red";
+        msg.innerText = "Заповніть обов'язкові поля (Назва та Дата)!";
+        return;
+    }
+
+    msg.style.color = "#3498db";
+    msg.innerText = "Збереження... Зачекайте";
+    document.querySelector('.save-btn').disabled = true;
+
+    // Функція для завантаження файлу на сервер
+    async function uploadFileIfNeeded(fileInputId, textInputId) {
+        const fileInput = document.getElementById(fileInputId);
+        const textInput = document.getElementById(textInputId).value;
+
+        if (fileInput.files.length > 0) {
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+            
+            try {
+                const res = await fetch(`${API_URL}/upload`, { method: "POST", body: formData });
+                if (res.ok) {
+                    const data = await res.json();
+                    return API_URL + data.file_url;
+                }
+            } catch (e) {
+                console.error("Помилка завантаження файлу", e);
+            }
+        }
+        return textInput || null;
+    }
+
+    // Отримуємо результати (файли або текст) - ОНОВЛЕНО ТУТ!
+    const finalInfo = await uploadFileIfNeeded('event-info-upload', 'event-info-link');
+    const finalStylists = await uploadFileIfNeeded('event-stylists-upload', 'event-stylists-link');
+    const finalResults = await uploadFileIfNeeded('event-results-upload', 'event-results-link');
+
+    const eventData = {
+        event_type: eventType, 
+        name, date, city, 
+        image: image || null,
+        organizers: organizers || null,
+        organization: organization || null,
+        categories: categories || null,
+        info_file: finalInfo,
+        stylists_file: finalStylists,
+        results_file: finalResults // ДОДАНО ПОЛЕ В ПЕЙЛОАД
+    };
+    
+    const method = editingEventId ? "PUT" : "POST";
+    const url = editingEventId ? `${API_URL}/events/${editingEventId}` : `${API_URL}/events`;
+
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(eventData)
+        });
+
+        if (response.ok) {
+            msg.style.color = "green";
+            msg.innerText = "Збережено успішно!";
+            
+            // Очищаємо всі поля (включаючи нове поле результатів!)
+            document.getElementById('event-type').value = 'Спортивні танці';
+            document.getElementById('event-name').value = '';
+            document.getElementById('event-date').value = '';
+            document.getElementById('event-city').value = '';
+            document.getElementById('event-organizers').value = '';
+            document.getElementById('event-organization').value = '';
+            document.getElementById('event-categories').value = ''; 
+            
+            document.getElementById('event-info-upload').value = '';
+            document.getElementById('event-info-link').value = '';
+            document.getElementById('event-stylists-upload').value = '';
+            document.getElementById('event-stylists-link').value = '';
+            document.getElementById('event-results-upload').value = ''; // очистка
+            document.getElementById('event-results-link').value = '';   // очистка
+            
+            editingEventId = null;
+            document.querySelector('.save-btn').innerText = 'Створити змагання';
+            document.querySelector('.save-btn').disabled = false;
+            loadEvents(); 
+        } else {
+            msg.style.color = "red";
+            msg.innerText = "Помилка збереження в базу!";
+            document.querySelector('.save-btn').disabled = false;
+        }
+    } catch (error) {
+        msg.style.color = "red";
+        msg.innerText = "Сервер не відповідає!";
+        document.querySelector('.save-btn').disabled = false;
+    }
+}
+
+        // --- 5. РЕДАГУВАННЯ ЗМАГАННЯ ---
+        function editEvent(id) {
+            const event = allEvents.find(e => e.id === id);
+            if(!event) return;
+            
+            document.getElementById('event-type').value = event.event_type || 'Спортивні танці';
+            document.getElementById('event-name').value = event.name;
+            document.getElementById('event-date').value = event.date;
+            document.getElementById('event-city').value = event.city;
+            document.getElementById('event-organizers').value = event.organizers || '';
+            document.getElementById('event-organization').value = event.organization || '';
+            document.getElementById('event-categories').value = event.categories || '';
+            
+            // Заповнюємо текстові поля при редагуванні
+            document.getElementById('event-info-link').value = event.info_file || '';
+            document.getElementById('event-stylists-link').value = event.stylists_file || '';
+            document.getElementById('event-results-link').value = event.results_file || '';
+            // Очищаємо інпути файлів
+            document.getElementById('event-info-upload').value = '';
+            document.getElementById('event-stylists-upload').value = '';
+            document.getElementById('event-results-upload').value = '';
+
+            
+            editingEventId = id;
+            document.querySelector('.save-btn').innerText = 'Оновити змагання';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- 6. ВИДАЛЕННЯ ЗМАГАННЯ ---
+        async function deleteEvent(id) {
+            if (!confirm("Видалити?")) return;
+            await fetch(`${API_URL}/events/${id}`, { method: "DELETE" });
+            loadEvents();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // === ЗАХИСТ АДМІНКИ ===
+            const role = localStorage.getItem("userRole");
+            const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+            if (isLoggedIn !== "true" || role !== "admin") {
+                alert("Доступ заборонено! Ви не є адміністратором.");
+                window.location.href = "login.html"; // Виганяємо на сторінку входу
+                return; // Зупиняємо виконання коду далі
+            }
+            // ======================
+
+            fetchUsers();
+            loadEvents(); 
+        });
+
+        function logoutAdmin() {
+            localStorage.clear(); // Очищаємо всі дані
+            window.location.href = "index.html";
+        }
+
+    </script>
+
+</body>
+</html>

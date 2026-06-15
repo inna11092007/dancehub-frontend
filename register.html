@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanceHub - Реєстрація</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .register-container { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { text-align: center; color: #333; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .submit-btn { width: 100%; padding: 12px; background-color: #e91e63; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .submit-btn:hover { background-color: #c2185b; }
+        #message { text-align: center; margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>Приєднуйся до DanceHub 💃</h2>
+        
+        <div class="form-group">
+            <input type="text" id="firstName" placeholder="Ім'я" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="lastName" placeholder="Прізвище" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" id="phone" placeholder="Телефон" required>
+        </div>
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" placeholder="Пароль" required>
+        </div>
+        
+        <button class="submit-btn" onclick="registerUser()">Зареєструватись</button>
+        
+        <p id="message"></p>
+    </div>
+
+    <script>
+        async function registerUser() {
+            // Беремо текст з полів вводу
+            const userData = {
+                first_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+
+            const messageElement = document.getElementById('message');
+
+            try {
+                // Відправляємо дані на наш бекенд (переконайся, що uvicorn працює!)
+                const response = await fetch("http://127.0.0.1:8000/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageElement.style.color = "green";
+                    messageElement.innerText = "Успіх! " + result.message;
+                    // Пізніше ми тут зробимо автоматичний перехід на сторінку логіну або профілю
+                } else {
+                    messageElement.style.color = "red";
+                    messageElement.innerText = "Помилка: " + result.detail;
+                }
+            } catch (error) {
+                messageElement.style.color = "red";
+                messageElement.innerText = "Сервер не відповідає. Перевір, чи запущений бекенд!";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dancer's Cup 2026 - Результати - DanceHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/event.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Стилі для рейтингу */
+        .rating-section { margin: 30px 0; }
+        .overall-rating { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .overall-rating h3 { font-size: 20px; color: #333; display: flex; align-items: center; gap: 10px; margin: 0; }
+        
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .rating-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #eef2f7;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .rating-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; min-height: 32px; }
+        .rating-header i { color: #4db2e6; font-size: 16px; width: 20px; text-align: center; }
+        .rating-header span { font-size: 12px; color: #444; font-weight: bold; line-height: 1.2; }
+        .rating-value { font-size: 20px; font-weight: bold; color: #333; margin-bottom: 4px; }
+        .stars { color: #ffc107; font-size: 11px; }
+        .progress-bar { height: 4px; background: #f0f4f8; border-radius: 2px; margin-top: 10px; }
+        .progress-fill { height: 100%; background: #4db2e6; border-radius: 2px; }
+        
+        .badge-finished { background: #6c757d !important; }
+        .btn-green { background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        /* --- СТИЛІ ДЛЯ СПОВІЩЕНЬ (TOAST) --- */
+.toast-container { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+.toast { padding: 15px 25px; border-radius: 8px; color: white; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: slideIn 0.3s ease-out forwards; display: flex; align-items: center; gap: 10px; font-size: 15px; }
+.toast.success { background-color: #2ecc71; }
+.toast.error { background-color: #e74c3c; }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+.btn-green:disabled { background-color: #8bc34a; cursor: not-allowed; opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo">DanceHub</div>
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="index.html" data-lang-key="nav_comp">Змагання</a></li>
+                <li><a href="results.html" data-lang-key="nav_results">Результати</a></li>
+                <li><a href="clubs.html" data-lang-key="nav_clubs">Клуби</a></li>
+                <li><a href="people.html" data-lang-key="nav_people">Люди</a></li>
+                <li><a href="#" data-lang-key="nav_ads">Оголошення</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span class="lang active">Укр</span><span class="separator">|</span><span class="lang">Eng</span>
+            </div>
+            <a href="login.html" class="login-btn"><i class="fa-solid fa-right-to-bracket"></i> <span data-lang-key="login">Вхід</span></a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="event-container">
+        <div class="event-left">
+            <div class="poster-wrapper">
+                <span class="badge-reg badge-finished" data-lang-key="finished_badge">ЗАВЕРШЕНО</span>
+                <img src="assets/images/dance1.jpg" alt="Poster">
+            </div>
+            <div class="action-buttons">
+                <button class="btn-green" id="download-results-btn"><i class="fas fa-file-download"></i> <span data-lang-key="btn_download_results">Завантажити результати</span></button>
+            </div>
+            <div class="bottom-links">
+                <a href="#" data-lang-key="link_info"><i class="fas fa-download"></i> Інформація</a>
+                <a href="#" data-lang-key="link_stylists"><i class="fas fa-download"></i> Стилісти</a>
+            </div>
+        </div>
+
+        <div class="event-right">
+            <h1 id="event-main-title">Dancer's Cup 2026</h1>
+            
+            <div class="info-item">
+                <div class="icon-box"><i class="far fa-calendar-alt"></i></div>
+                <div class="info-content">
+                    <label data-lang-key="label_date">Дата</label>
+                    <span id="event-main-date">21 лют. 2026</span>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="info-content">
+                    <label data-lang-key="label_location">Місце проведення</label>
+                    <span id="event-main-city">Київ, Chamber Plaza</span>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon-box"><i class="fas fa-users"></i></div>
+                <div class="info-content">
+                    <label data-lang-key="label_organizers">Організатори</label>
+                    <span id="event-main-organizers">Сенченко Антон, Гордюта Софія</span>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon-box"><i class="fas fa-university"></i></div>
+                <div class="info-content">
+                    <label data-lang-key="label_organization">Організація</label>
+                    <span id="event-main-organization">ФТСУ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card"><h2>295</h2><p data-lang-key="stat_dancers">ТАНЦЮРИСТИ</p></div>
+        <div class="stat-card"><h2>78</h2><p data-lang-key="stat_couples">ПАРИ</p></div>
+        <div class="stat-card"><h2>148</h2><p data-lang-key="stat_solos">СОЛО</p></div>
+        <div class="stat-card"><h2>534</h2><p data-lang-key="stat_entries">УЧАСТЕЙ</p></div>
+    </div>
+
+    <div class="content-card rating-section" id="dynamic-rating-section">
+        <p style="text-align: center; color: #888; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Підрахунок рейтингу...</p>
+    </div>
+
+    <div class="tabs-container">
+        <div class="tabs-header">
+            <button class="tab-btn active" onclick="openTab(event, 'about')"><i class="far fa-file-alt"></i> <span data-lang-key="tab_about">ПРО ЗМАГАННЯ</span></button>
+            <button class="tab-btn" onclick="openTab(event, 'categories')"><i class="fas fa-cubes"></i> <span data-lang-key="tab_categories">КАТЕГОРІЇ</span></button>
+            <button class="tab-btn" onclick="openTab(event, 'judges')"><i class="fas fa-users"></i> <span data-lang-key="tab_judges">СУДДІ</span> (11)</button>
+            <button class="tab-btn" onclick="openTab(event, 'clubs')"><i class="fas fa-user-friends"></i> <span data-lang-key="tab_clubs">КЛУБИ</span> (49)</button>
+            <button class="tab-btn" onclick="openTab(event, 'reviews')"><i class="far fa-comment-dots"></i> <span data-lang-key="tab_reviews">ВІДГУКИ</span></button>
+        </div>
+
+        <div class="tab-content-wrapper">
+            <div id="about" class="tab-content" style="display: block;">
+                <div class="content-card">
+                    <div class="card-title"><i class="fas fa-file-alt blue-icon"></i> <span data-lang-key="about_title">Про змагання</span></div>
+                    <p><strong>DANCER'S CUP 2026</strong></p>
+                    <p data-lang-key="about_desc_finished">Всеукраїнські відкриті змагання з танцювального спорту. Змагання успішно завершені.</p>
+                </div>
+            </div>
+
+            <div id="categories" class="tab-content">
+                <div class="content-card">
+                    <div class="card-title"><i class="fas fa-cubes blue-icon"></i> <span data-lang-key="categories_title">Категорії змагань</span></div>
+                    <div class="table-responsive" id="dynamic-categories-container">
+                        <p data-lang-key="loading_schedule" style="padding: 20px; text-align: center; color: #888;">Завантаження категорій...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="judges" class="tab-content">
+                <div class="content-card">
+                    <div class="card-title"><i class="fas fa-gavel blue-icon"></i> <span data-lang-key="judges_title">Суддівська колегія</span></div>
+                    <div class="person-grid" id="dynamic-judges-container">
+                        <p data-lang-key="loading_judges" style="padding: 20px; text-align: center; color: #888;">Завантаження списку суддів...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="clubs" class="tab-content">
+                <div class="content-card">
+                    <div class="card-title"><i class="fas fa-user-friends blue-icon"></i> <span data-lang-key="clubs_title">Танцювальні клуби</span></div>
+                    <div class="person-grid" id="dynamic-clubs-container">
+                        <p data-lang-key="loading_clubs" style="padding: 20px; text-align: center; color: #888;">Завантаження списку клубів...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reviews" class="tab-content" style="display:none;">
+                <div class="content-card">
+                    <div class="card-title">
+                        <i class="far fa-comment-dots blue-icon"></i> 
+                        <span data-lang-key="reviews_heading" style="font-size: 18px; font-weight: bold; color: #2c3e50;">Відгуки та оцінки змагань</span>
+                    </div>
+
+                    <div id="review-form-wrapper">
+                        </div>
+
+                    <div class="comments-list" id="reviews-container">
+                        <p style="text-align: center; color: #888;" data-lang-key="loading_reviews">Завантаження відгуків...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="logo">DanceHub</h2>
+            <p data-lang-key="footer_desc">Dance Competition Management Platform</p>
+            <div class="socials">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_links_title">ШВИДКІ ПОСИЛАННЯ</h3>
+            <ul>
+                <li data-lang-key="footer_news">Новини</li>
+                <li>Artistic & Modern dances</li>
+                <li data-lang-key="footer_privacy">Приватність</li>
+                <li data-lang-key="footer_offer">Публічна оферта</li>
+                <li data-lang-key="footer_contact">Зворотній зв'язок</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_sub_title">ПІДПИСАТИСЬ НА РОЗСИЛКУ</h3>
+            <div class="subscribe">
+                <input type="email" data-lang-placeholder="footer_email_placeholder" placeholder="Введіть Ваш e-mail">
+                <button data-lang-key="footer_sub_btn">Підписатись</button>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_stats_title">ЗАРЕЄСТРОВАНІ ТАНЦЮРИСТИ</h3>
+            <p class="big-number" id="dancers-count">0</p>
+            <h4 data-lang-key="footer_payment_title">МИ ПРИЙМАЄМО</h4>
+            <p class="payment-icons">
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-visa"></i>
+            </p>
+        </div>
+    </div>
+    <div class="footer-bottom">DanceHub 2026. <span data-lang-key="footer_rights">All Rights Reserved</span></div>
+</footer>
+<div id="toast-container" class="toast-container"></div>
+<div id="premium-modal" class="modal-overlay" style="display: none;">
+    <div class="premium-box">
+        <button class="close-modal" onclick="closePremiumModal()"><i class="fas fa-times"></i></button>
+        <div class="premium-icon"><i class="fas fa-crown"></i></div>
+        <h3>Ексклюзивний доступ</h3>
+        <p>Детальні результати будуть доступні безкоштовно через 3 дні після завершення змагання.</p>
+        <p class="highlight-text">Хочете отримати їх прямо зараз?</p>
+        
+        <div class="price-tag">50 ₴</div>
+        
+        <button class="btn-green pay-btn" onclick="processPayment()"><i class="fas fa-credit-card"></i> Оплатити та Завантажити</button>
+        <p class="small-note">Безпечна оплата через WayForPay / LiqPay</p>
+    </div>
+</div>
+
+<style>
+/* Стилі для вікна оплати */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(4px); }
+.premium-box { background: #fff; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: popIn 0.3s ease-out; }
+.close-modal { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; color: #888; cursor: pointer; transition: 0.2s; }
+.close-modal:hover { color: #e74c3c; }
+.premium-icon { font-size: 50px; color: #f1c40f; margin-bottom: 15px; }
+.premium-box h3 { margin: 0 0 10px 0; color: #2c3e50; font-size: 22px; }
+.premium-box p { color: #555; font-size: 14px; margin-bottom: 10px; line-height: 1.5; }
+.highlight-text { font-weight: bold; color: #333; font-size: 16px !important; }
+.price-tag { font-size: 32px; font-weight: bold; color: #2ecc71; margin: 15px 0; }
+.pay-btn { width: 100%; padding: 15px; font-size: 16px; margin-top: 10px; }
+.small-note { font-size: 11px !important; color: #aaa; margin-top: 15px; }
+@keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+</style>
+
+<script>
+function closePremiumModal() {
+    document.getElementById('premium-modal').style.display = 'none';
+}
+
+async function processPayment() {
+    const userId = localStorage.getItem("user_id");
+    if (!userId) {
+        alert("Будь ласка, увійдіть в систему (або зареєструйтеся), щоб здійснити оплату.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Дістаємо ID змагання з посилання сайту (наприклад, ?id=5)
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentEventId = urlParams.get('id'); 
+    const API_URL = "http://127.0.0.1:8000"; // Твій бекенд
+    
+    // Знаходимо кнопку і робимо анімацію завантаження
+    const btn = document.querySelector('.pay-btn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Зв\'язок з банком...';
+    btn.disabled = true;
+
+    // Імітуємо, що банк думає 2 секунди
+    setTimeout(async () => {
+        try {
+            // Відправляємо дані про покупку на наш бекенд
+            const response = await fetch(`${API_URL}/buy-results`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    user_id: parseInt(userId),
+                    event_id: parseInt(currentEventId),
+                    amount: 50
+                })
+            });
+
+            if (response.ok) {
+                alert("Оплата пройшла успішно! Дякуємо.");
+                closePremiumModal();
+                // Перезавантажуємо сторінку, щоб доступ відкрився
+                window.location.reload(); 
+            } else {
+                alert("Помилка оплати. Спробуйте ще раз.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        } catch (error) {
+            alert("Помилка зв'язку з сервером.");
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    }, 2000); // 2 секунди затримки
+}
+</script>
+<script src="js/script.js"></script>
+</body>
+</html>

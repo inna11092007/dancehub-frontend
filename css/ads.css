@@ -1,0 +1,633 @@
+/* --- СТИЛІ ДЛЯ СТОРІНКИ ОГОЛОШЕНЬ --- */
+.ads-main {
+    margin-top: 0;
+}
+
+/* Блакитна зона табів */
+.ads-top-tabs {
+    background: linear-gradient(135deg, #4db2e6, #2f9bd1);
+    padding: 30px 0;
+}
+
+.ads-tabs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.ads-tab-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.ads-tab-card:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.ads-tab-card.active {
+    background: #fff;
+    color: #333;
+    border: 2px solid transparent;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.ads-tab-card .tab-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.ads-tab-card.active .tab-icon i {
+    color: #4db2e6;
+}
+
+.ads-tab-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.ads-tab-card p {
+    font-size: 13px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.ads-tab-card.active p {
+    color: #6c757d;
+    opacity: 1;
+}
+
+.lessons-count {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* Панель фільтрів */
+.ads-content-area {
+    padding: 40px 0;
+}
+
+.ads-filters-panel {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.filter-item {
+    flex: 1;
+    position: relative;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.custom-select {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    color: #495057;
+    padding-right: 25px;
+}
+
+.filter-item .arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+/* Картки оголошень */
+.ads-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.ad-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eef2f7;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    transition: 0.3s;
+}
+
+.ad-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-color: #dcdcdc;
+}
+
+.ad-card-main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start;
+}
+
+.ad-user-img, .ad-product-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.ad-product-img {
+    border-radius: 8px; /* Картки товарів та послуг мають квадратні фото */
+}
+
+.ad-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ad-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ad-user-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+.ad-location {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.ad-location i {
+    color: #dcdcdc;
+    margin-right: 5px;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    width: fit-content;
+    margin-bottom: 12px;
+}
+
+.partner-badge {
+    background: #eef7ff;
+    color: #4db2e6;
+}
+
+.goods-badge {
+    background: #fff1f8;
+    color: #ff69b4;
+}
+
+.services-badge {
+    background: #e6fffa;
+    color: #2ecfcf;
+}
+
+.ad-text {
+    font-size: 14px;
+    color: #495057;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.ad-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2f3e4f;
+}
+
+.ad-card-footer {
+    border-top: 1px solid #eef2f7;
+    padding: 15px 20px;
+}
+
+.ad-date {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.ad-date i {
+    margin-right: 5px;
+}
+
+/* Стан "Відсутні результати" */
+.ad-no-results {
+    text-align: center;
+    padding: 80px 0;
+    color: #94a3b8;
+}
+
+.ad-no-results i {
+    font-size: 60px;
+    color: #dcdcdc;
+    margin-bottom: 20px;
+}
+
+.ad-no-results p {
+    font-size: 18px;
+}
+
+/* Кнопка "ПОКАЗАТИ НАСТУПНИХ..." */
+.load-more-container {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.load-more-btn {
+    background: linear-gradient(135deg, #4db2e6, #2f9bd1);
+    color: #fff;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Плаваючий гудзик "+" */
+.fab-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #4db2e6, #2f9bd1);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(77, 178, 230, 0.4);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+}
+
+.fab-btn:hover {
+    transform: scale(1.1);
+}
+
+/* --- ФУТЕР (ідентично за 4-м скріншотом) --- */
+.footer {
+    background: #2f3f4f; /* Темно-синій */
+    color: #cbd5e1; /* Світло-сірий текст */
+    padding: 50px 0 20px;
+    margin-top: 80px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.footer h2.logo {
+    color: #38bdf8; /* Світло-блакитний лого */
+}
+
+.footer h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.footer ul li:hover {
+    color: #38bdf8;
+}
+
+.socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social {
+    width: 40px;
+    height: 40px;
+    background: #3f5162; /* Трохи світліший синій */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.subscribe {
+    display: flex;
+    gap: 5px;
+}
+
+.subscribe input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    flex: 1;
+}
+
+.subscribe button {
+    background: #38bdf8;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.big-number {
+    font-size: 32px;
+    color: #38bdf8;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.payment-icons {
+    font-size: 30px;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #475569;
+    font-size: 13px;
+}
+/* --- СТИЛІ МОДАЛЬНОГО ВІКНА ДЛЯ ДОДАВАННЯ ОГОЛОШЕННЯ --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Затемнення фону */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px; /* Твій фірмовий радіус */
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 22px;
+    color: #333;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-input:focus {
+    border-color: #4db2e6; /* Твій блакитний колір при фокусі */
+}
+
+/* Кнопка опублікувати у стилі твоїх інших кнопок */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #4db2e6, #2f9bd1); /* Твій градієнт */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(77, 178, 230, 0.2);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(77, 178, 230, 0.4);
+}
+/* Схований стан */
+.hidden {
+    display: none !important;
+}
+/* ========================================= */
+/* ІДЕАЛЬНА МОБІЛЬНА ВЕРСТКА ДЛЯ ОГОЛОШЕНЬ   */
+/* ========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. СИНЯ ЗОНА ТА КАРТКИ (СІТКА 2х2 БЕЗ СКРОЛУ) */
+    .ads-top-tabs {
+        padding: 20px 0 !important; /* Робимо плашку акуратнішою */
+    }
+
+    .ads-tabs-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Рівно 2 колонки */
+        gap: 10px !important; /* Невеликий акуратний відступ між кнопками */
+        width: 100% !important;
+    }
+
+    .ads-tab-card {
+        padding: 12px 8px !important; /* Компактні внутрішні відступи */
+        min-height: 80px !important; /* Фіксована невелика висота */
+        height: 80px !important;
+        border-radius: 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+
+    .ads-tab-card .tab-icon {
+        font-size: 20px !important; /* Акуратна маленька іконка */
+        margin-bottom: 4px !important;
+    }
+
+    .ads-tab-card h3 {
+        font-size: 12px !important; /* Зменшуємо шрифт, щоб текст не вилазив */
+        line-height: 1.2 !important;
+        font-weight: 600 !important;
+        text-align: center !important;
+        margin: 0 !important;
+        white-space: normal !important; /* Дозволяємо красивий перенос */
+    }
+
+    /* Ховаємо довгі описи, щоб картки були мінімалістичними кнопочками */
+    .ads-tab-card p {
+        display: none !important;
+    }
+
+    /* Синій кружечок для Уроків */
+    .lessons-count {
+        top: 6px !important;
+        right: 6px !important;
+        font-size: 10px !important;
+        padding: 2px 5px !important;
+    }
+
+    /* 2. ПОВЕРТАЄМО ПЛЮСИК НА МІСЦЕ (ЯК НА ІНШИХ СТОРІНКАХ) */
+    .fab-btn {
+        position: fixed !important;
+        bottom: 30px !important;
+        right: 30px !important;
+        width: 60px !important;
+        height: 60px !important;
+        z-index: 999 !important;
+    }
+
+    /* 3. ПАНЕЛЬ ФІЛЬТРІВ */
+    .ads-filters-panel {
+        flex-direction: column !important; /* Фільтри один під одним */
+        gap: 10px !important;
+        padding: 15px !important;
+        margin-bottom: 25px !important;
+    }
+
+    .filter-item {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 4. КАРТКИ САМИХ ОГОЛОШЕНЬ (ЗАХИСТ ВІД РОЗТЯГУВАННЯ) */
+    .ad-card-main {
+        padding: 15px !important;
+        gap: 15px !important;
+    }
+
+    .ad-user-img, .ad-product-img {
+        width: 55px !important; /* Трохи менша аватарка/фото товару */
+        height: 55px !important;
+    }
+
+    .ad-details {
+        min-width: 0 !important; /* Захист від вилізання довгого тексту */
+        word-break: break-word !important;
+    }
+
+    .ad-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+
+    .ad-user-name {
+        font-size: 15px !important;
+    }
+
+    .ad-price {
+        font-size: 17px !important;
+    }
+
+    .ad-text {
+        font-size: 13px !important;
+    }
+
+    /* 5. АДАТАЦІЯ ФУТЕРА */
+    .footer-container {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 30px !important;
+    }
+
+    .socials, .payment-icons {
+        justify-content: center !important;
+    }
+
+    .subscribe {
+        flex-direction: column !important;
+    }
+}

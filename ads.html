@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanceHub - Оголошення</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ads.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo">DanceHub</div>
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="index.html" data-lang-key="nav_comp">Змагання</a></li>
+                <li><a href="results.html" data-lang-key="nav_results">Результати</a></li>
+                <li><a href="clubs.html" data-lang-key="nav_clubs">Клуби</a></li>
+                <li><a href="people.html" data-lang-key="nav_people">Люди</a></li>
+                <li><a href="ads.html" class="active" data-lang-key="nav_ads">Оголошення</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span class="lang active">Укр</span><span class="separator">|</span><span class="lang">Eng</span>
+            </div>
+            <a href="login.html" class="login-btn"><i class="fa-solid fa-right-to-bracket"></i> <span data-lang-key="login">Вхід</span></a>
+        </div>
+    </div>
+</header>
+
+<main class="ads-main">
+    <div class="ads-top-tabs">
+        <div class="container">
+            <div class="ads-tabs-grid">
+                <div class="ads-tab-card active" data-type="partner">
+                    <div class="tab-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h3 data-lang-key="tab_partner_title">Шукаю партнера</h3>
+                    <p data-lang-key="tab_partner_desc">Пошук партнера/партнерки</p>
+                </div>
+                <div class="ads-tab-card" data-type="goods">
+                    <div class="tab-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <h3 data-lang-key="tab_goods_title">Товари</h3>
+                    <p data-lang-key="tab_goods_desc">продаж/купівля</p>
+                </div>
+                <div class="ads-tab-card" data-type="services">
+                    <div class="tab-icon"><i class="fa-solid fa-user-gear"></i></div>
+                    <h3 data-lang-key="tab_services_title">Послуги / Робота</h3>
+                    <p data-lang-key="tab_services_desc">послуги/робота</p>
+                </div>
+                <div class="ads-tab-card" data-type="lessons">
+                    <div class="tab-icon"><i class="fa-solid fa-user-group"></i></div>
+                    <span class="lessons-count">0</span>
+                    <h3 data-lang-key="tab_lessons_title">Уроки</h3>
+                    <p data-lang-key="tab_lessons_desc">навчання проводжу/шукаю</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ads-content-area">
+        <div class="container">
+            <div class="ads-filters-panel">
+                <div class="filter-item">
+                    <select id="type-filter" class="custom-select">
+                        <option value="all" data-lang-key="filter_type">Тип</option>
+                        <option value="find-partner" data-lang-key="filter_find_partner">шукаю партнера</option>
+                        <option value="find-partnerka" data-lang-key="filter_find_partnerka">шукаю партнерку</option>
+                    </select>
+                    <span class="arrow">▼</span>
+                </div>
+
+                <div class="filter-item">
+                    <input type="text" id="city-filter" class="custom-select" data-lang-placeholder="filter_enter_city" placeholder="🔍 Введіть місто..." autocomplete="off" style="border: none; outline: none; background: transparent; width: 100%; padding-right: 15px;">
+                </div>
+            </div>
+
+            <div class="ads-list" id="ads-container">
+                
+                <div class="ad-card partner-ad">
+                    <div class="ad-card-main">
+                        <img src="assets/images/user-placeholder.png" alt="" class="ad-user-img">
+                        <div class="ad-details">
+                            <h3 class="ad-user-name">Елеонора Коваленко</h3>
+                            <p class="ad-location"><i class="fas fa-map-marker-alt"></i> <span data-lang-key="city_kyiv">Київ</span></p>
+                            <span class="badge partner-badge" data-lang-key="badge_partner">ПОШУК ПАРТНЕРА</span>
+                            <p class="ad-text">шукаю партнера київ</p>
+                        </div>
+                    </div>
+                    <div class="ad-card-footer">
+                        <p class="ad-date"><i class="far fa-clock"></i> 2026-04-10T20:35:42.6797143</p>
+                    </div>
+                </div>
+
+                <div class="ad-card goods-ad hidden">
+                    <div class="ad-card-main">
+                        <img src="assets/images/dress.jpg" alt="" class="ad-product-img">
+                        <div class="ad-details">
+                            <div class="ad-header">
+                                <h3 class="ad-user-name">Оксана Крейтор</h3>
+                                <span class="ad-price">23000 <span data-lang-key="currency_uah">грн.</span></span>
+                            </div>
+                            <p class="ad-location"><i class="fas fa-map-marker-alt"></i> <span data-lang-key="city_lviv">Львів</span></p>
+                            <span class="badge goods-badge" data-lang-key="badge_goods_women">ПРОДАЖ ДЛЯ ЖІНОК</span>
+                            <p class="ad-text">Сукня від Emelya розмір XS-S, зріст 160-170 Аксесуари в комплекті Пишіть за номером або в телеграм @OksanaKreitor</p>
+                        </div>
+                    </div>
+                    <div class="ad-card-footer">
+                        <p class="ad-date"><i class="far fa-clock"></i> 2026-03-22T09:37:42.6599503</p>
+                    </div>
+                </div>
+
+                <div class="ad-card services-ad hidden">
+                    <div class="ad-card-main">
+                        <img src="assets/images/sewing.jpg" alt="" class="ad-product-img">
+                        <div class="ad-details">
+                            <h3 class="ad-user-name">Катерина Якобчук</h3>
+                            <p class="ad-location"><i class="fas fa-map-marker-alt"></i> <span data-lang-key="city_rivne">Рівне</span></p>
+                            <span class="badge services-badge" data-lang-key="badge_services">НАДАМ ПОСЛУГИ</span>
+                            <p class="ad-text">Пошиття бейсиків для танців, суконь на латиноамериканську програму та стандартну. Доставка по всій Україні .</p>
+                        </div>
+                    </div>
+                    <div class="ad-card-footer">
+                        <p class="ad-date"><i class="far fa-clock"></i> 2026-04-04T05:42:31.8697386</p>
+                    </div>
+                </div>
+
+                <div class="ad-no-results hidden">
+                    <i class="fa-solid fa-magnifying-glass-minus"></i>
+                    <p data-lang-key="no_results">Відсутні результати пошуку!</p>
+                </div>
+            </div>
+
+            <div class="load-more-container hidden">
+                <button class="load-more-btn" data-lang-key="btn_load_more_ads">ПОКАЗАТИ НАСТУПНИХ 20 ОГОЛОШЕНЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="fab-btn"><i class="fa-solid fa-plus"></i></button>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="logo">DanceHub</h2>
+            <p data-lang-key="footer_desc">Dance Competition Management Platform</p>
+            <div class="socials">
+                <a href="#" target="_blank" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="social"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_links_title">ШВИДКІ ПОСИЛАННЯ</h3>
+            <ul>
+                <li data-lang-key="footer_news">Новини</li>
+                <li>Artistic & Modern dances</li>
+                <li data-lang-key="footer_privacy">Приватність</li>
+                <li data-lang-key="footer_offer">Публічна оферта</li>
+                <li data-lang-key="footer_contact">Зворотній зв'язок</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_sub_title">ПІДПИСАТИСЬ НА РОЗСИЛКУ</h3>
+            <div class="subscribe">
+                <input type="email" data-lang-placeholder="footer_email_placeholder" placeholder="Введіть Ваш e-mail">
+                <button data-lang-key="footer_sub_btn">Підписатись</button>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_stats_title">ЗАРЕЄСТРОВАНІ ТАНЦЮРИСТИ</h3>
+            <p class="big-number" id="dancers-count">0</p>
+            <h4 data-lang-key="footer_payment_title">МИ ПРИЙМАЄМО</h4>
+            <p class="payment-icons">
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-visa"></i>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        DanceHub 2026. <span data-lang-key="footer_rights">All Rights Reserved</span>
+    </div>
+</footer>
+<div id="addAdModal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn" id="closeAdModal">&times;</span>
+        <h2>Додати оголошення</h2>
+        <form id="addAdForm">
+            <div class="form-group">
+                <label>Категорія:</label>
+                <select id="ad-tab-type" required class="custom-select">
+                    <option value="partner">Шукаю партнера/партнерку</option>
+                    <option value="goods">Товари</option>
+                    <option value="services">Послуги / Робота</option>
+                    <option value="lessons">Уроки</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="modal-partner-type-group">
+                <label>Кого саме ви шукаєте?</label>
+                <select id="ad-partner-type" class="custom-select">
+                    <option value="find-partner">Шукаю партнера (хлопця)</option>
+                    <option value="find-partnerka">Шукаю партнерку (дівчину)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Місто:</label>
+                <input type="text" id="ad-city" required placeholder="Наприклад: Київ" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label>Текст оголошення:</label>
+                <textarea id="ad-text" required rows="4" placeholder="Опишіть деталі..." class="form-input"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Ціна (якщо товар/послуга):</label>
+                <input type="text" id="ad-price" placeholder="Наприклад: 500 грн" class="form-input">
+            </div>
+
+            <button type="submit" class="submit-btn">Опублікувати</button>
+        </form>
+    </div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>

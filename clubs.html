@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanceHub - Танцювальні клуби</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/clubs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo">DanceHub</div>
+        
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="index.html"><span data-lang-key="nav_comp">Змагання</span></a></li>
+                <li><a href="results.html"><span data-lang-key="nav_results">Результати</span></a></li>
+                <li><a href="clubs.html" class="active"><span data-lang-key="nav_clubs">Клуби</span></a></li>
+                <li><a href="people.html"><span data-lang-key="nav_people">Люди</span></a></li>
+                <li><a href="ads.html"><span data-lang-key="nav_ads">Оголошення</span></a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span class="lang active">Укр</span><span class="separator">|</span><span class="lang">Eng</span>
+            </div>
+            <a href="login.html" class="login-btn"><i class="fa-solid fa-right-to-bracket"></i> <span data-lang-key="login">Вхід</span></a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="clubs-header-box">
+        <h1 data-lang-key="clubs_title">Танцювальні клуби</h1>
+        <p class="results-info"><span data-lang-key="shown_text">Показано</span> <span id="shown-count">0</span> <span data-lang-key="out_of_text">з</span> <span id="total-count">0</span> <span data-lang-key="results_text">результатів</span></p>
+    </div>
+
+    <div class="filter-panel-wrapper">
+      <div class="filter-panel">
+        <div class="filter-item border-right">
+            <select id="club-country-input" class="panel-select">
+                <option value="all" data-lang-key="filter_all_countries">Всі країни</option>
+                <option value="ua">Ukraine (Україна)</option>
+                <option value="pl">Poland (Польща)</option>
+                <option value="ee">Estonia (Естонія)</option>
+                <option value="fi">Finland (Фінляндія)</option>
+                <option value="fr">France (Франція)</option>
+                <option value="ge">Georgia (Грузія)</option>
+                <option value="de">Germany (Німеччина)</option>
+                <option value="gr">Greece (Греція)</option>
+                <option value="md">Moldova (Молдова)</option>
+                <option value="pt">Portugal (Португалія)</option>
+                <option value="ro">Romania (Румунія)</option>
+                <option value="rs">Serbia (Сербія)</option>
+                <option value="ae">United Arab Emirates (ОАЕ)</option>
+                <option value="uk">United Kingdom (Велика Британія)</option>
+                <option value="us">USA (США)</option>
+            </select>
+            <span class="panel-arrow">▼</span>
+        </div>
+
+        <div class="filter-item border-right search-input-box">
+            <input type="text" class="panel-select" data-lang-placeholder="filter_enter_city" style="border: none; outline: none; width: 100%; background: transparent;" id="club-city-input" placeholder="Введіть місто...">
+        </div>
+
+        <div class="filter-item search-item">
+            <input type="text" data-lang-placeholder="club_search_placeholder" placeholder="Назва клубу" id="club-search-input">
+            <i class="fa-solid fa-magnifying-glass search-icon-blue"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="clubs-grid" id="clubs-container">
+        <div class="club-card">
+            <div class="club-img-container">
+                <img src="assets/images/club1.jpg" alt="">
+                <div class="club-card-content">
+                    <h3>"Eskada" простір танцю та...</h3>
+                    <p>Ужгород, Україна</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="club-card">
+            <div class="club-img-container">
+                <img src="assets/images/club2.jpg" alt="">
+                <div class="club-card-content">
+                    <h3>"PARADANCE" <span class="blue-dot"></span></h3>
+                    <p>Тальне, Україна</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="club-card">
+            <div class="club-img-container">
+                <img src="assets/images/club3.jpg" alt="">
+                <div class="club-card-content">
+                    <h3>«Зразковий художній коле...</h3>
+                    <p>Миколаїв, Україна</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="club-card hidden-extra">
+            <div class="club-img-container">
+                <img src="assets/images/club1.jpg" alt="">
+                <div class="club-card-content">
+                    <h3>Клуб "Танцювальний Світ"</h3>
+                    <p>Київ, Україна</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="club-card hidden-extra">
+            <div class="club-img-container">
+                <img src="assets/images/club2.jpg" alt="">
+                <div class="club-card-content">
+                    <h3>"Elite Dance"</h3>
+                    <p>Варшава, Польща</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="club-card hidden-extra">
+            <div class="club-img-container">
+                <img src="assets/images/club3.jpg" alt="">
+                <div class="club-card-content">
+                    <h3>"Golden Step"</h3>
+                    <p>Львів, Україна</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="load-more">
+        <button id="load-more-clubs" class="blue-btn" data-lang-key="btn_load_more">Завантажити більше клубів</button>
+    </div>
+
+</main> 
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="logo">DanceHub</h2>
+            <p data-lang-key="footer_desc">Dance Competition Management Platform</p>
+            <div class="socials">
+                <a href="#" target="_blank" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="social"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_links_title">ШВИДКІ ПОСИЛАННЯ</h3>
+            <ul>
+                <li data-lang-key="footer_news">Новини</li>
+                <li>Artistic & Modern dances</li>
+                <li data-lang-key="footer_privacy">Приватність</li>
+                <li data-lang-key="footer_offer">Публічна оферта</li>
+                <li data-lang-key="footer_contact">Зворотній зв'язок</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_sub_title">ПІДПИСАТИСЬ НА РОЗСИЛКУ</h3>
+            <div class="subscribe">
+                <input type="email" data-lang-placeholder="footer_email_placeholder" placeholder="Введіть Ваш e-mail">
+                <button data-lang-key="footer_sub_btn">Підписатись</button>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-lang-key="footer_stats_title">ЗАРЕЄСТРОВАНІ ТАНЦЮРИСТИ</h3>
+            <p class="big-number" id="dancers-count">0</p>
+            <h4 data-lang-key="footer_payment_title">МИ ПРИЙМАЄМО</h4>
+            <p class="payment-icons">
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-visa"></i>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        DanceHub 2026. <span data-lang-key="footer_rights">All Rights Reserved</span>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const countryF = document.getElementById('club-country-input');
+        const cityF = document.getElementById('club-city-input');
+        const searchF = document.getElementById('club-search-input');
+
+        function applyLocalFilters() {
+            if (!countryF || !cityF || !searchF) return;
+
+            const countryText = countryF.options[countryF.selectedIndex].text.toLowerCase();
+            const countryVal = countryF.value;
+            const cityVal = cityF.value.trim().toLowerCase();
+            const searchVal = searchF.value.trim().toLowerCase();
+
+            const cards = document.querySelectorAll('.club-card');
+            let shownCount = 0;
+
+            cards.forEach(card => {
+                // Знімаємо клас hidden-extra, щоб фільтр шукав по всіх 6 картках
+                card.classList.remove('hidden-extra'); 
+
+                const title = card.querySelector('h3') ? card.querySelector('h3').textContent.toLowerCase() : '';
+                const location = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
+                
+                let isMatch = true;
+
+                if (countryVal !== 'all') {
+                    // Витягуємо українську назву країни з дужок, наприклад "Україна"
+                    const countryUa = countryText.includes('(') ? countryText.split('(')[1].replace(')', '').trim() : countryText;
+                    if (!location.includes(countryUa)) isMatch = false;
+                }
+
+                if (cityVal !== '' && !location.includes(cityVal)) {
+                    isMatch = false;
+                }
+
+                if (searchVal !== '' && !title.includes(searchVal)) {
+                    isMatch = false;
+                }
+
+                if (isMatch) {
+                    card.style.display = 'block';
+                    shownCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const shownEl = document.getElementById('shown-count');
+            const totalEl = document.getElementById('total-count');
+            if(shownEl) shownEl.textContent = shownCount;
+            if(totalEl) totalEl.textContent = cards.length;
+        }
+
+        if (countryF) countryF.addEventListener('change', applyLocalFilters);
+        if (cityF) cityF.addEventListener('input', applyLocalFilters);
+        if (searchF) searchF.addEventListener('input', applyLocalFilters);
+        
+        applyLocalFilters(); 
+    });
+</script>
+
+</body>
+</html>
